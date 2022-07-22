@@ -1,0 +1,198 @@
+/**
+ * Copyright (C) 2020-2022 Wycliffe Associates
+ *
+ * This file is part of Orature.
+ *
+ * Orature is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Orature is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Orature.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.source-content {
+    -fx-focus-traversable: false;
+}
+
+.source-content__root {
+    -fx-background-color: -wa-background;
+    -fx-padding: 10px 20px;
+    -fx-alignment: center;
+}
+
+.source-content__label {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
+
+.source-content__top {
+    -fx-alignment: center;
+}
+
+.source-content__bottom {
+    -fx-min-height: 60px;
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: -wa-border-light;
+}
+
+.source-content__not-available {
+    -fx-alignment: center;
+    -fx-font-size: 1.3em;
+    -fx-background-color: -wa-card-image-placeholder-background;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 45px;
+}
+
+.source-content__not-available .label {
+    -fx-text-fill: -wa-inverse-text;
+}
+
+.source-content__minimize-btn {
+    -fx-pref-height: 30px;
+}
+
+.source-content__minimize-btn:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+}
+
+.source-content__minimize-btn .ikonli-font-icon {
+    -fx-icon-size: 20px;
+    -fx-fill: -wa-regular-text;
+}
+
+.source-content__text-container {
+    -fx-pref-height: 100px;
+}
+
+.source-content__audio_container {
+    -fx-alignment: center-left;
+    -fx-padding: 8px;
+    -fx-min-height: 60px;
+    -fx-spacing: 20px;
+    -fx-background-color: -wa-foreground;
+    -fx-background-radius: 5;
+}
+
+.source-content__audio_container--target {
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: -wa-border-light;
+    -fx-padding: 15px 5px;
+}
+
+.source-content__text-container {
+    -fx-padding: 10 0 0 0;
+}
+
+.source-content__chunk-list {
+    -fx-border-width: 3px;
+    -fx-border-radius: 6px;
+    -fx-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.source-content__chunk-list:focused {
+    -fx-border-color: -wa-card-border;
+}
+
+.source-content__chunk-list .list-cell {
+    -fx-padding: 5 15;
+}
+
+.source-content__text {
+    -fx-text-fill: -wa-regular-text;
+    -fx-wrap-text: true;
+}
+
+.source-content__text--highlighted {
+    -fx-text-fill: -wa-highlight-text;
+}
+
+.source-content__license-text {
+    -fx-padding: 10px 15px 0 15px;
+    -fx-font-size: 18px !important;
+    -fx-text-fill: -wa-note-text;
+    -fx-wrap-text: true;
+}
+
+.source-content__title {
+    -fx-padding: 0 80px 0 0;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.source-content__zoom-control {
+    -fx-alignment: center-left;
+}
+
+.source-content__zoom-control .btn--icon .ikonli-font-icon {
+    -fx-icon-size: 22px;
+    -fx-fill: -wa-regular-text;
+}
+
+.source-content__zoom-rate-text {
+    -fx-min-width: 65px;
+    -fx-padding: 0 2px;
+    -fx-font-size: 1.25em;
+    -fx-text-fill: -wa-regular-text;
+    -fx-alignment: center;
+}
+
+/* font size zoom rates */
+.text-zoom-50 {
+    -fx-font-size: 1em;
+}
+.text-zoom-60 {
+    -fx-font-size: 1.1em;
+}
+.text-zoom-70 {
+    -fx-font-size: 1.2em;
+}
+.text-zoom-80 {
+    -fx-font-size: 1.3em;
+}
+.text-zoom-90 {
+    -fx-font-size: 1.4em;
+}
+.text-zoom-100 {
+    -fx-font-size: 1.5em;
+}
+.text-zoom-110 {
+    -fx-font-size: 1.6em;
+}
+.text-zoom-120 {
+    -fx-font-size: 1.7em;
+}
+.text-zoom-130 {
+    -fx-font-size: 1.8em;
+}
+.text-zoom-140 {
+    -fx-font-size: 1.9em;
+}
+.text-zoom-150 {
+    -fx-font-size: 2.0em;
+}
+.text-zoom-160 {
+    -fx-font-size: 2.1em;
+}
+.text-zoom-170 {
+    -fx-font-size: 2.2em;
+}
+.text-zoom-180 {
+    -fx-font-size: 2.3em;
+}
+.text-zoom-190 {
+    -fx-font-size: 2.4em;
+}
+.text-zoom-200 {
+    -fx-font-size: 2.5em;
+}

@@ -1,0 +1,225 @@
+/**
+ * Copyright (C) 2020-2022 Wycliffe Associates
+ *
+ * This file is part of Orature.
+ *
+ * Orature is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Orature is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Orature.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.app-drawer__content {
+    -fx-pref-width: 550px;
+    -fx-background-color: -wa-foreground;
+    -fx-effect: -wa-level5;
+}
+
+.app-drawer-container {
+    -fx-spacing: 30px;
+    -fx-pref-width: 550px;
+    -fx-background-color: -wa-foreground;
+    -fx-padding: 40px;
+}
+
+.app-drawer__scroll-pane {
+    -fx-background-color: -wa-foreground;
+}
+
+.app-drawer__title {
+    -fx-font-size: 36px;
+    -fx-wrap-text: true;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.app-drawer__subtitle {
+    -fx-font-weight: bold;
+    -fx-font-size: 26px;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.app-drawer__subtitle--small {
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.app-drawer__section {
+    -fx-spacing: 20px;
+    -fx-pref-width: 400px;
+}
+
+.app-drawer__section--filled {
+    -fx-background-color: -wa-take-card-placeholder;
+    -fx-background-radius: 6px;
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+}
+
+.app-drawer__report-message {
+    -fx-font-size: 16px;
+    -fx-pref-height: 110px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-border-color: -wa-border-light;
+    -fx-border-width: 2px;
+}
+
+.app-drawer__report-message:focused {
+    -fx-background-fill: transparent;
+}
+
+.app-drawer__report-status {
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-text-fill: -wa-note-text;
+}
+
+.app-drawer__text {
+    -fx-font-size: 20px;
+    -fx-wrap-text: true;
+    -fx-fill: -wa-regular-text;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.app-drawer__text--error {
+    -fx-text-fill: -wa-red;
+    -fx-wrap-text: true;
+}
+
+.app-drawer__text--link {
+    -fx-font-size: 1.4em;
+}
+
+.app-drawer__text--link .ikonli-font-icon {
+    -fx-font-size: 1.6em;
+    -fx-fill: -wa-highlight-text;
+}
+
+.app-drawer__text--centered {
+    -fx-font-size: 20px;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.app-drawer__plugin-list {
+    -fx-spacing: 10px;
+}
+
+.app-drawer__plugin {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+.app-drawer__plugin-header {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+.app-drawer__plugin-header .app-drawer__text {
+    -fx-text-fill: -wa-note-text;
+    -fx-font-size: 16px;
+}
+
+.app-drawer__plugin-header__icon {
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-alignment: center;
+}
+
+.app-drawer__plugin-header .ikonli-font-icon {
+    -fx-fill: -wa-regular-text;
+    -fx-font-size: 24px;
+}
+
+.app-drawer__plugin__radio-btn-wrapper {
+    -fx-pref-width: 50px;
+    -fx-alignment: center;
+}
+
+.app-drawer__plugin .select-button {
+    -fx-background-color: transparent;
+}
+
+.app-drawer__drag-drop-area {
+    -fx-alignment: center;
+    -fx-border-width: 2px;
+    -fx-border-radius: 6px;
+    -fx-border-color: -wa-primary;
+    -fx-border-style: segments(20, 10);
+    -fx-background-color: -wa-drag-drop-area;
+    -fx-background-radius: 6px;
+    -fx-padding: 25px;
+    -fx-spacing: 10px;
+}
+
+.app-drawer__drag-drop-area__icon .ikonli-font-icon {
+    -fx-fill: -wa-primary;
+    -fx-font-size: 80px;
+}
+
+.app-drawer__overlay {
+    -fx-background-color: -wa-dialog-overlay;
+}
+
+.app-drawer__shortcut {
+    -fx-border-width: 1px;
+    -fx-border-color: -wa-text-field-border;
+    -fx-border-radius: 6px;
+    -fx-padding: 10px;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.app-drawer__shortcut .ikonli-font-icon {
+    -fx-fill: -wa-regular-text;
+}
+
+.app-drawer-success {
+    -fx-text-fill: -wa-success-color;
+}
+
+.app-drawer-error {
+    -fx-text-fill: -wa-error-color;
+}
+
+.app-drawer-progress-bar {
+    -fx-max-width: infinity;
+}
+
+.app-drawer-progress {
+    -fx-pref-height: 48px;
+    -fx-max-width: infinity;
+    -fx-background-radius: 6px;
+    -fx-background-insets: 0;
+    -fx-border-radius: 4px;
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-primary-dark;
+    -fx-border-style: solid;
+}
+
+.app-drawer-progress .track {
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0;
+    -fx-background-color: -wa-primary-gradient;
+}
+
+.app-drawer-progress .bar {
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0;
+    -fx-background-color: -wa-primary-dark;
+}
+
+.app-drawer-progress-text {
+    -fx-text-fill: -wa-primary-btn-text-fill;
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+}

@@ -1,0 +1,821 @@
+/**
+ * Copyright (C) 2020-2022 Wycliffe Associates
+ *
+ * This file is part of Orature.
+ *
+ * Orature is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Orature is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Orature.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* -------------- Todo List -------------- */
+/* TODO: .btn class should have a `0.2s Ease-in-out` transition for all effects applied. */
+
+/* -------------- Button Base -------------- */
+/* This controls all of the common variables found in each button type */
+.btn {
+    -fx-pref-height: 48px;
+    -fx-background-radius: 6px;
+    -fx-background-insets: 0;
+    -fx-border-radius: 4px;
+    -fx-border-style: solid;
+    -fx-font-size: 20px;
+    -fx-cursor: hand;
+}
+
+.btn:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-insets: -2;
+}
+
+/* -------------- Button Icon -------------- */
+.btn__icon {
+    -fx-icon-color: inherit;
+    -fx-icon-size: 20px;
+    -fx-space: 10px;
+}
+
+.btn--icon {
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-btn-icon-border-color;
+    -fx-background-color: -wa-btn-icon-background;
+    -fx-pref-width: 48px;
+    -fx-pref-height: 48px;
+    -fx-padding: 0;
+}
+
+.btn--icon:hover {
+    -fx-background-color: -wa-btn-icon-background-hover;
+}
+
+.btn--icon:pressed {
+    -fx-background-color: -wa-btn-icon-background-pressed;
+}
+
+.btn--icon:disabled {
+    -fx-background-color: -wa-transparent;
+    -fx-border-width: 0;
+}
+
+.btn--icon:selected {
+    -fx-background-color: -wa-btn-icon-background-selected;
+    -fx-border-width: 0;
+}
+
+.btn--icon:selected .ikonli-font-icon {
+    -fx-fill: -wa-btn-icon-background-selected;
+}
+
+/* -------------- Primary Button -------------- */
+.btn--primary {
+    -fx-background-color: -wa-primary-gradient;
+    -fx-effect: -wa-level2;
+    -fx-text-fill: -wa-primary-btn-text-fill;
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-primary-dark;
+    -fx-underline: true;
+    -fx-font-size: 20px;
+}
+
+.btn--primary .ikonli-font-icon {
+    -fx-fill: -wa-primary-btn-text-fill;
+    -fx-font-size: 20px;
+}
+
+.btn--primary:hover {
+    -fx-background-color: -wa-primary;
+    -fx-effect: -wa-level1;
+    -fx-underline: false;
+}
+
+.btn--primary:pressed {
+    -fx-background-color: -wa-primary-dark;
+    -fx-effect: -wa-level1;
+    -fx-underline: false;
+}
+
+.btn--primary:disabled {
+    -fx-background-color: -wa-disabled-background;
+    -fx-border-width: 0px;
+    -fx-text-fill: -wa-disabled-text;
+    -fx-effect: -wa-level0;
+    -fx-cursor: disappear;
+    -fx-underline: false;
+}
+
+.btn--primary:disabled .ikonli-font-icon {
+    -fx-fill: -wa-disabled-text;
+}
+
+/* -------------- Call to Action Button -------------- */
+/*  This is the highest priority button and should always 
+/*  highlight the most desireable action the user would take. 
+/*  Only 1 CTA button should be used on a page. */
+.btn--cta {
+    -fx-background-color: -wa-cta-gradient;
+    -fx-effect: -wa-level2;
+    -fx-border-color: -wa-accent-dark;
+    -fx-border-width: 2px;  
+    -fx-text-fill: -wa-black;
+    -fx-underline: true;
+    -fx-font-size: 20px;
+    -jfx-disable-visual-focus: true;
+}
+.btn--cta .ikonli-font-icon {
+    -fx-font-size: 20px;
+    -fx-fill: -wa-black;
+}
+.btn--cta:hover {
+    -fx-background-color: -wa-accent;
+    -fx-effect: -wa-level1;
+    -fx-underline: false;
+
+}
+.btn--cta:disabled {
+    -fx-background-color: -wa-gray-lighter;
+    -fx-text-fill: -wa-gray;
+    -fx-icon-color: -wa-gray;
+    -fx-effect: -wa-level0;
+    -fx-cursor: disappear;
+    -fx-opacity: 1;
+}
+
+/* -------------- Secondary Button -------------- */
+.btn--secondary {
+    -fx-background-color: -wa-secondary-btn-background;
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-secondary-btn-border;
+    -fx-text-fill: -wa-secondary-btn-text-fill;
+    -fx-font-size: 1.4em;
+    -fx-underline: true;
+    -jfx-disable-visual-focus: true;
+}
+.btn--secondary .ikonli-font-icon {
+    -fx-font-size: 1.6em;
+    -fx-fill: -wa-secondary-btn-text-fill;
+}
+.btn--secondary:hover {
+    -fx-background-color: -wa-secondary-btn-background-hover;
+    -fx-border-color: -wa-secondary-btn-text-fill-hover;
+    -fx-text-fill: -wa-secondary-btn-text-fill-hover;
+    -fx-underline: false;
+}
+.btn--secondary:hover .ikonli-font-icon {
+    -fx-fill: -wa-secondary-btn-text-fill-hover;
+}
+.btn--secondary:pressed {
+    -fx-background-color: -wa-secondary-btn-background-pressed;
+    -fx-border-color: -wa-secondary-btn-text-fill-pressed;
+    -fx-text-fill: -wa-secondary-btn-text-fill-pressed;
+    -fx-underline: false;
+}
+.btn--secondary:pressed .ikonli-font-icon {
+    -fx-fill: -wa-secondary-btn-text-fill-pressed;
+}
+.btn--secondary:disabled {
+    -fx-cursor: disappear;
+    -fx-text-fill: -wa-disabled-text;
+    -fx-border-color: -wa-disabled-text;
+    -fx-border-width: 2px;
+    -fx-underline: false;
+}
+.btn--secondary:disabled .ikonli-font-icon {
+    -fx-fill: -wa-disabled-text;
+}
+
+.btn--secondary-light {
+    -fx-text-fill: -wa-white;
+    -fx-border-color: -wa-white;
+}
+
+.btn--secondary-light .ikonli-font-icon {
+    -fx-fill: -wa-white;
+}
+
+.btn--secondary-light:hover {
+    -fx-background-color: -wa-white-05;
+    -fx-border-color: -wa-white;
+    -fx-text-fill: -wa-white;
+}
+
+.btn--secondary-light:hover .ikonli-font-icon {
+    -fx-fill: -wa-white;
+}
+
+.btn--secondary-light:pressed {
+    -fx-background-color: -wa-white-10;
+    -fx-border-color: -wa-white;
+    -fx-text-fill: -wa-white;
+}
+
+.btn--secondary-light:pressed .ikonli-font-icon {
+    -fx-fill: -wa-white;
+}
+
+.btn--secondary-light:disabled {
+    -fx-border-width: 0;
+    -fx-text-fill: -wa-white-80;
+}
+
+.btn--secondary-light:disabled .ikonli-font-icon {
+    -fx-fill: -wa-white-80;
+}
+
+.btn--borderless, .btn--borderless:disabled {
+    -fx-border-width: 0;
+}
+
+/* -------------- Tertiary Button -------------- */
+/* This button is very rarely used
+/* Typically only found in misc dialogs or on very heavy screens */
+.btn--tertiary {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-text-fill: -wa-secondary-btn-text-fill;
+    -fx-icon-color: -wa-secondary-btn-text-fill;
+    -fx-graphic-text-gap: 8px;
+}
+.btn--tertiary:hover {
+    -fx-background-color: -wa-secondary-btn-background-hover;
+    -fx-text-fill: -wa-secondary-btn-text-fill-hover;
+    -fx-icon-color: -wa-secondary-btn-text-fill-hover;
+}
+.btn--tertiary:disabled {
+    -fx-cursor: disappear;
+    -fx-text-fill: -wa-disabled-text;
+    -fx-icon-color: -wa-disabled-text;
+    -fx-border-width: 0px;
+    -fx-background-color: transparent;
+}
+/* -------------- Toggle Group -------------- */
+.wa-toggle-btn-group {
+    -fx-background-color: -wa-toggle-background;
+    -fx-background-radius: 8px;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn {
+    -fx-max-width: infinity;
+    -fx-max-height: infinity;
+    -fx-border-width: 1 0 1 1;
+    -fx-border-color: -wa-toggle-border;
+    -fx-border-insets: 0;
+    -fx-border-radius: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: -wa-transparent;
+    -fx-background-radius: 0;
+    -fx-effect: none;
+    -fx-text-fill: -wa-regular-text;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn:selected {
+    -fx-background-color: -wa-toggle-selected;
+    -fx-text-fill: white;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn:pressed {
+    -fx-background-color: -wa-foreground-pressed;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn:focused {
+    -fx-border-width: 4px !important;
+    -fx-border-color: -wa-button-border;
+    -fx-border-insets: -2;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn.first-child {
+    -fx-border-radius: 8 0 0 8;
+    -fx-background-radius: 8 0 0 8;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn.last-child {
+    -fx-border-width: 1;
+    -fx-border-radius: 0 8 8 0;
+    -fx-background-radius: 0 8 8 0;
+}
+
+.wa-toggle-btn-group .custom-toggle-btn.first-child.last-child {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+/* -------------- Text Link ----------------- */
+.wa-text--hyperlink {
+    -fx-padding: 5 5 10 5;
+    -fx-text-fill: -wa-highlight-text;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.wa-text--hyperlink:hover {
+    -fx-underline: false;
+}
+
+.wa-text--hyperlink:visited {
+    -fx-text-fill: -wa-highlight-text;
+}
+
+/* -------------- Text Input ---------------- */
+.txt-input {
+    -fx-pref-height: 48px;
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-text-field-border;
+    -fx-border-radius: 6px;
+    -fx-background-color: -wa-text-field-background;
+    -fx-background-radius: 8px;
+    -fx-text-fill: -wa-regular-text;
+    -fx-font-size: 20px;
+}
+.txt-input-success {
+    -fx-border-color: -wa-success-color;
+}
+.txt-input-error {
+    -fx-border-color: -wa-error-color;
+}
+.txt-input:hover {
+    -fx-background-color: -wa-text-field-background-hover;
+}
+.txt-input:focused:hover {
+    -fx-background-color: -wa-text-field-background-focused-hover;
+}
+.txt-input:focused {
+    -fx-text-fill: -wa-text-input-fill;
+    -fx-background-color: -wa-text-field-background-focused;
+    -fx-border-color: -wa-text-field-border-focused;
+    -fx-effect: -wa-text-field-focused-effect;
+}
+.txt-input:disabled {
+    -fx-border-width: 0px;
+    -fx-background-color: -wa-black-20;
+}
+.txt-input--success {
+    -fx-border-color: -wa-green;
+    -fx-background-color: -wa-green-05-noalpha;
+    -fx-text-fill: -wa-green;
+}
+.txt-input--success:hover {
+    -fx-background-color: -wa-green-10-noalpha;
+}
+.txt-input--success:focused {
+    -fx-border-color: -wa-green;
+    -fx-effect: dropshadow(gaussian, -wa-green, 10, 0, 0, 0);
+}
+.txt-input--error {
+    -fx-border-color: -wa-red;
+    -fx-background-color: -wa-red-05-noalpha;
+    -fx-text-fill: -wa-red;
+}
+.txt-input--error:hover {
+    -fx-background-color: -wa-red-10-noalpha;
+}
+.txt-input--error:focused {
+    -fx-border-color: -wa-red;
+    -fx-effect: dropshadow(gaussian, -wa-red, 10, 0, 0, 0);
+}
+
+/* -------------- Combobox ---------------- */
+
+.wa-combobox {
+    -fx-background-color: -wa-combo-box-background;
+    -fx-background-radius: 6px;
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-text-field-border;
+    -fx-border-radius: 6px;
+    -fx-font-size: 20px;
+    -fx-pref-height: 48px;
+    -fx-cursor: hand;
+}
+
+.wa-combobox:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-insets: -2;
+}
+
+.wa-combobox .arrow {
+    -fx-background-color: -wa-regular-text;
+}
+
+.wa-combobox:hover {
+    -fx-background-color: -wa-foreground-hover;
+}
+
+.wa-combobox:showing {
+    -fx-background-color: -wa-primary-10;
+}
+
+.wa-combobox:showing > .list-cell .label {
+    -fx-text-fill: -wa-primary;
+}
+
+.wa-combobox:showing > .arrow-button .arrow {
+    -fx-background-color: -wa-primary;
+}
+
+.wa-combobox:showing .ikonli-font-icon {
+    -fx-fill: -wa-primary;
+}
+
+.wa-combobox:pressed {
+    -fx-background-color: -wa-black-10;
+}
+
+.wa-combobox .list-cell:hover,
+.wa-combobox .combo-box-popup .list-cell:hover {
+    -fx-background-color: -wa-foreground-hover;
+}
+
+.wa-combobox .list-cell:pressed {
+    -fx-background-color: -wa-foreground-pressed;
+}
+
+.wa-combobox .combo-box-popup {
+    -fx-pref-height: 200px;
+}
+
+.wa-combobox .combo-box-popup .list-cell {
+    -fx-padding: 5px;
+    -fx-background-color: -wa-foreground;
+}
+
+.wa-combobox .combo-box-popup .list-cell .label {
+    -fx-text-fill: -wa-regular-text;
+}
+
+.wa-combobox .combo-box-popup .list-cell:selected {
+    -fx-background-color: -wa-combo-box-background-selected;
+}
+
+.wa-combobox .combo-box-popup .list-cell:selected .label {
+    -fx-text-fill: -wa-primary;
+}
+
+.wa-combobox .combo-box-popup .list-cell:selected .ikonli-font-icon {
+    -fx-fill: -wa-primary;
+}
+
+.wa-combobox-button {
+    -fx-spacing: 10px;
+}
+
+.wa-combobox .wa-combobox-button .label {
+    -fx-text-fill: -wa-regular-text;
+}
+
+.wa-combobox-button .ikonli-font-icon {
+    -fx-fill: -wa-regular-text;
+}
+
+.wa-combobox-item {
+    -fx-padding: 5px;
+    -fx-spacing: 5px;
+    -fx-pref-width: 304px;
+}
+
+.wa-combobox-item__top {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.wa-combobox .combo-box-popup .list-cell:hover .wa-combobox-item__top {
+    -fx-underline: true;
+}
+
+.wa-combobox-item__bottom {
+    -fx-font-size: 16px;
+}
+
+/* -------------- Radio button ---------------- */
+
+.wa-radio .radio {
+    -fx-background-color: -wa-white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 1.0em;
+    -fx-border-color: -wa-gray-darker;
+    -fx-background-insets: -2, 0;
+}
+
+.wa-radio:selected .radio {
+    -fx-border-color: -wa-primary;
+}
+
+.wa-radio:selected .dot {
+    -fx-background-color: -wa-primary;
+    -fx-background-insets: -2, 0;
+}
+
+.wa-radio:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-radius: 6px;
+}
+
+.wa-radio--bordered {
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-black-30;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+}
+
+.wa-radio:selected.wa-radio--bordered {
+    -fx-border-width: 0px;
+    -fx-background-color: -wa-primary-10;
+    -fx-padding: 14px;
+}
+
+.wa-radio--bordered:hover {
+    -fx-background-color: -wa-black-05;
+}
+
+.wa-radio--bordered:pressed {
+    -fx-background-color: -wa-black-10;
+}
+
+.wa-radio--bordered:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-radius: 6px;
+}
+
+/* -------------- Checkbox ---------------- */
+
+.wa-checkbox .box {
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-border-neutral;
+    -fx-border-radius: 2px;
+    -fx-background-color: -wa-checkbox-background;
+}
+
+.wa-checkbox:selected .box {
+    -fx-border-color: -wa-primary;
+    -fx-background-color: -wa-primary;
+}
+
+.wa-checkbox:selected .mark {
+    -fx-background-color: -wa-white;
+}
+
+.wa-checkbox--bordered {
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-black-30;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+}
+
+.wa-checkbox:selected.wa-checkbox--bordered {
+    -fx-border-width: 0px;
+    -fx-background-color: -wa-primary-10;
+    -fx-padding: 14px;
+}
+
+/* -------------- Slider ---------------- */
+
+.wa-slider .track {
+    -fx-background-color: -wa-slider-track-color;
+    -fx-background-radius: 6px;
+    -fx-border-color: -wa-slider-border-color;
+    -fx-border-radius: 6px;
+    -fx-pref-height: 8px;
+}
+
+.wa-slider .colored-track {
+    -fx-background-color: -wa-primary;
+}
+
+.wa-slider .thumb {
+    -fx-background-color: -wa-primary;
+    -fx-background-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: -wa-white;
+    -fx-border-radius: 10px;
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+}
+
+.wa-slider:focused .thumb {
+    -fx-border-color: -wa-button-border;
+    -fx-border-width: 4px;
+}
+
+.wa-slider .animated-thumb {
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-background-color: -wa-primary;
+}
+
+/* ---------------- Audio Slider --------------- */
+.wa-audio-slider {
+    -fx-focus-traversable: true;
+}
+
+.wa-audio-slider .wa-audio-slider-thumb {
+    -fx-stroke-width: 1;
+    -fx-fill: -wa-minimap-slider-background;
+}
+
+.wa-audio-slider:focused .wa-audio-slider-thumb {
+    -fx-stroke-width: 4;
+    -fx-stroke: -wa-button-border;
+}
+
+/* ----------------- ListView ---------------- */
+.wa-list-view {
+    -fx-background-color: -wa-transparent;
+}
+
+.wa-list-view .list-cell:selected,
+.wa-list-view .list-cell:even,
+.wa-list-view .list-cell:odd {
+    -fx-background-color: -wa-transparent;
+}
+
+/* ------------------- Menu Button --------------- */
+.wa-menu-button {
+    -fx-pref-height: 48px;
+    -fx-padding: 0 10px;
+    -fx-background-color: -wa-filter-button-background;
+    -fx-background-radius: 6px;
+    -fx-alignment: center;
+    -fx-spacing: 7px;
+    -fx-cursor: hand;
+}
+
+.wa-menu-button:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-radius: 6px;
+    -fx-border-insets: -4;
+}
+
+.wa-menu-button__content {
+    -fx-alignment: center;
+    -fx-spacing: 6px;
+}
+
+.wa-menu-button .context-menu {
+    -fx-background-color: -wa-foreground;
+    -fx-background-radius: 6px;
+}
+
+.wa-menu-button .menu-item {
+    -fx-background-color: -wa-foreground;
+}
+
+.wa-menu-button__list-item {
+    -fx-focus-traversable: true;
+}
+
+.wa-menu-button__list-item:focused,
+.wa-menu-button .menu-item:focused .wa-menu-button__list-item,
+.wa-menu-button .menu-item:focused .wa-menu-button__btn-util {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-radius: 6px;
+    -fx-border-insets: -4;
+}
+
+.wa-menu-button__btn-util {
+    -fx-focus-traversable: true;
+}
+
+.wa-menu-button .label {
+    -fx-font-family: 'sans-serif';
+    -fx-text-fill: -wa-regular-text;
+}
+
+.wa-menu-button .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-fill: -wa-regular-text;
+}
+
+.wa-menu-button__icon .ikonli-font-icon {
+    -fx-icon-size: 34;
+    -fx-icon-color: -wa-regular-text;
+}
+
+.wa-menu-button__separator {
+    -fx-focus-traversable: false;
+}
+
+.wa-menu-button__separator .label {
+    -fx-text-fill: -wa-regular-text;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'sans-serif';
+    -fx-focus-traversable: false;
+}
+
+.wa-menu-button__large-text {
+    -fx-font-size: 36px;
+}
+
+.wa-menu-button__list-item {
+    -fx-pref-width: 400px;
+    -fx-padding: 15px 20px;
+}
+
+.wa-menu-button__list-item:hover {
+    -fx-background-color: -wa-btn-icon-background-selected;
+    -fx-background-radius: 6px;
+}
+
+.wa-menu-button__list-item:hover .label {
+    -fx-text-fill: -wa-primary;
+}
+
+.wa-menu-button__list-item .label {
+    -fx-font-size: 20px;
+}
+
+.wa-menu-button__arrow .ikonli-font-icon {
+   -fx-icon-size: 12;
+   -fx-icon-color: -wa-regular-text;
+}
+
+/* ------------------- Hyperlink --------------- */
+
+.hyperlink:focused {
+    -fx-border-width: 4px;
+    -fx-border-color: -wa-button-border;
+    -fx-border-style: solid;
+    -fx-border-radius: 6px;
+    -fx-border-insets: -3;
+}
+
+/* ------------------- TabPane --------------- */
+
+.wa-tab-pane {
+    -fx-tab-min-height: 57px;
+    -fx-tab-max-height: 57px;
+    -fx-tab-min-width: 157px;
+    -fx-tab-max-width: 157px;
+    -fx-effect: -wa-level2;
+}
+
+.wa-tab-pane .tab {
+    -fx-border-width: 0 0 3px 0;
+    -fx-border-radius: 3px 3px 0 0;
+    -fx-border-color: rgba(224,224,224, .87);
+    -fx-background-color: -wa-tab-background;
+}
+
+.wa-tab-pane .tab:hover {
+}
+
+.wa-tab-pane .tab:selected {
+    -fx-background-color: -wa-selected-tab-background;
+    -fx-border-color: -wa-selected-tab-line;
+    -fx-border-width: 0 0 3 0;
+}
+
+.wa-tab-pane:focused .tab {
+    -fx-border-color: transparent;
+}
+
+.wa-tab-pane .tab-header-background {
+    -fx-background-color: -wa-tab-region-background;
+}
+
+.wa-tab-pane .tab-header-area .tab-down-button {
+    -fx-background-color: BLACK;
+}
+
+.wa-tab-pane .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.wa-tab-pane:focused .tab:selected .focus-indicator {
+    -fx-border-color: -wa-button-border -wa-button-border -wa-selected-tab-line -wa-button-border;
+    -fx-border-width: 3px;
+}
+
+.wa-tab-pane:top .tab-header-area {
+    -fx-padding: 0;
+}
+
+.wa-tab-pane.singleTab .tab-header-area {
+    -fx-pref-height: 0;
+}
+
+.wa-tab-pane .tab:selected .tab-label {
+    -fx-text-fill: -wa-selected-tab-label;
+}
+
+.wa-tab-pane .tab-label {
+    -fx-font-size: 16px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: -wa-regular-text;
+    -fx-font-family: "Noto Sans";
+    -fx-font-weight: NORMAL;
+}
