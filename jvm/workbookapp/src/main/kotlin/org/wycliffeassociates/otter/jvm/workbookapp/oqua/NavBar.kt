@@ -12,17 +12,17 @@ class NavBar : View() {
         }
         button("OQuA") {
             action {
-                viewModel.activeWorkbookProperty.set(null)
+                viewModel.wbDataStore.activeWorkbookProperty.set(null)
             }
         }
         button(viewModel.projectTitleProperty){
             style { visibleWhen(booleanBinding(viewModel.projectTitleProperty) { value != null }) }
             action {
-                viewModel.targetChapterProperty.set(null)
+                viewModel.wbDataStore.activeChapterProperty.set(null)
             }
         }
         button(viewModel.chapterTitleProperty) {
-            style { visibleWhen(booleanBinding(viewModel.targetChapterProperty) { value != null }) }
+            style { visibleWhen(booleanBinding(viewModel.wbDataStore.activeChapterProperty) { value != null }) }
         }
     }
 }

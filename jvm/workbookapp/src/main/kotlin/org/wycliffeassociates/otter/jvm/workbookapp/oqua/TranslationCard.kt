@@ -8,8 +8,8 @@ import tornadofx.*
 fun tCardFromWB (workbook: Workbook): TranslationCard {
     val translation = Translation(workbook.source.language, workbook.target.language, null)
     val projects = observableListOf<Workbook>()
-    if (workbook.target.chapters.toList().blockingGet().any {
-        it.audio.selected.value?.value != null
+    if (workbook.target.chapters.toList().blockingGet().any { chapter ->
+        chapter.audio.selected.value?.value != null
     }) {
         projects.add(workbook)
     }
@@ -22,4 +22,8 @@ class TranslationCard (
 ) {
     override fun equals(other: Any?): Boolean =
         ((other is TranslationCard) && (translation == other.translation))
+
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
 }

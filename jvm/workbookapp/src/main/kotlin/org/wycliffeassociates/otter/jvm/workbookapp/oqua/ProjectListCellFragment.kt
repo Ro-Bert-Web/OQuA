@@ -1,6 +1,5 @@
 package org.wycliffeassociates.otter.jvm.workbookapp.oqua
 
-import javafx.scene.layout.Priority
 import org.wycliffeassociates.otter.common.data.workbook.Workbook
 import tornadofx.*
 
@@ -12,7 +11,7 @@ class ProjectListCellFragment: ListCellFragment<Workbook>() {
     override val root = vbox {
         button (projectProperty) {
             action {
-                viewModel.activeWorkbookProperty.set(item)
+                viewModel.wbDataStore.activeWorkbookProperty.set(item)
             }
         }
     }

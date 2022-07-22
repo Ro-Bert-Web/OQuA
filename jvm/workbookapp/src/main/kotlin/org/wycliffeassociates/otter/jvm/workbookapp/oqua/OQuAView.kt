@@ -14,14 +14,18 @@ class OQuAView : View() {
     private val view = SimpleObjectProperty<Node>(find(HomeView::class).root)
 
     init {
-        viewModel.activeWorkbookProperty.onChange { updateView() }
-        viewModel.targetChapterProperty.onChange { updateView() }
+        viewModel.wbDataStore.activeWorkbookProperty.onChange { updateView() }
+        viewModel.wbDataStore.activeChapterProperty.onChange { updateView() }
     }
 
     private fun updateView() {
-        if (viewModel.workbook == null) { view.set(homeView.root) }
-        else if (viewModel.chapter == null) { view.set(projectView.root) }
-        else { view.set(chapterView.root) }
+        if (viewModel.wbDataStore.activeWorkbookProperty.value == null) {
+            view.set(homeView.root)
+        } else if (viewModel.wbDataStore.activeChapterProperty.value == null) {
+            view.set(projectView.root)
+        } else {
+            view.set(chapterView.root)
+        }
     }
 
     override val root = borderpane {

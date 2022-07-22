@@ -9,7 +9,21 @@ class ChapterView : View() {
     override val root = vbox {
         vgrow = Priority.ALWAYS
         hgrow = Priority.ALWAYS
-        text(viewModel.takeFileProperty)
+        text (
+            stringBinding(viewModel.takeProperty) {
+                value?.file?.absolutePath
+            }
+        )
+
+//        simpleaudioplayer {
+//            hgrow = Priority.ALWAYS
+//
+//            viewModel.takeModelProperty.onChange { take ->
+//                take?.let {
+//                    playerProperty.set(take.audioPlayer)
+//                }
+//            }
+//        }
         listview<Question> {
             vgrow = Priority.ALWAYS
             hgrow = Priority.ALWAYS

@@ -10,7 +10,7 @@ class ProjectView : View() {
     override val root = listview<Chapter> {
         vgrow = Priority.ALWAYS
         hgrow = Priority.ALWAYS
-        itemsProperty().bind(viewModel.targetChaptersProperty)
+        itemsProperty().bind(viewModel.chaptersProperty)
         cellFragment(ChapterListCellFragment::class)
     }
 }

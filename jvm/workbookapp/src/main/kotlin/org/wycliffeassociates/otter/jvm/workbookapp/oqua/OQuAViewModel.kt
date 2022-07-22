@@ -1,75 +1,49 @@
 package org.wycliffeassociates.otter.jvm.workbookapp.oqua
 
-import javafx.beans.property.SimpleObjectProperty
-import org.wycliffeassociates.otter.common.data.workbook.Chapter
-import org.wycliffeassociates.otter.common.data.workbook.Workbook
 import org.wycliffeassociates.otter.common.utils.capitalizeString
+import org.wycliffeassociates.otter.jvm.workbookapp.ui.viewmodel.WorkbookDataStore
 import tornadofx.*
 
-fun chapterEquals(a: Chapter?, b: Chapter?): Boolean =
-    (a != null && b != null) && (a.sort == b.sort) && (a.title == b.title)
-
 class OQuAViewModel: ViewModel() {
+    val wbDataStore: WorkbookDataStore by inject()
     private val workbookRepo = (app as OQuAApp).dependencyGraph.injectWorkbookRepository()
 
     val tCards = observableListOf<TranslationCard>()
 
     // Properties of active workbook
-    val activeWorkbookProperty = SimpleObjectProperty<Workbook>()
-    val workbook: Workbook?
-        get() = activeWorkbookProperty.value
-    val projectTitleProperty = stringBinding(activeWorkbookProperty) {
-        when (this.value) {
-            null -> null
-            else -> this.value.target.title
-        }
+    val projectTitleProperty = stringBinding(wbDataStore.activeWorkbookProperty) {
+        value?.target?.title
     }
-    val targetChaptersProperty = objectBinding(activeWorkbookProperty) {
-        when (this.value) {
-            null -> null
-            else -> this.value.target.chapters.toList().blockingGet().filter{
-                it.audio.selected.value?.value != null
-            }.asObservable()
-        }
-    }
-    val sourceChaptersProperty = objectBinding(targetChaptersProperty) {
-        when (activeWorkbookProperty.value) {
-            null -> null
-            else -> activeWorkbookProperty.value.source.chapters.toList().blockingGet().filter { source ->
-                targetChaptersProperty.value?.find { chapterEquals(it, source) } != null
-            }.asObservable()
-        }
+    val chaptersProperty = objectBinding(wbDataStore.activeWorkbookProperty) {
+        value?.target?.chapters?.toList()?.blockingGet()?.filter { chapter ->
+            chapter.audio.selected.value?.value != null
+        }?.asObservable()
     }
 
     // Properties of active chapter
-    val targetChapterProperty = SimpleObjectProperty<Chapter>()
-    val chapter: Chapter?
-        get() = targetChapterProperty.value
-    val sourceChapterProperty = objectBinding(targetChapterProperty) {
-        sourceChaptersProperty.value?.find { chapterEquals(it, this.value) }
+    val chapterTitleProperty = stringBinding(wbDataStore.activeChapterProperty) {
+        "${value?.label?.capitalizeString()} ${value?.title}"
     }
-    val chapterTitleProperty = stringBinding(targetChapterProperty) {
-        "${this.value?.label?.capitalizeString()} ${this.value?.title}"
-    }
-    val chapterTake
-        get() = targetChapterProperty.value?.audio?.selected?.value?.value
-    val questionsProperty = objectBinding(sourceChapterProperty) {
-        when (this.value) {
-            null -> null
-            else -> questionsDedup((this.value as Chapter).chunks.toList().blockingGet().mapNotNull(::questionFromChunk)).asObservable()
+    val questionsProperty = objectBinding(wbDataStore.activeChapterProperty) {
+        value?.let {
+            wbDataStore.getSourceChapter().blockingGet()?.let { chapter ->
+                questionsDedup(chapter.chunks.toList().blockingGet().mapNotNull(::questionFromChunk)).asObservable()
+            }
         }
     }
-    val takeFileProperty = stringBinding(targetChapterProperty) {
-        chapterTake?.file?.absolutePath
+    val takeProperty = objectBinding(wbDataStore.activeChapterProperty) {
+        value?.let { chapter ->
+            chapter.audio.selected.value?.value
+        }
     }
 
 
     init {
-        activeWorkbookProperty.onChange {
+        wbDataStore.activeWorkbookProperty.onChange {
             println("Active Workbook Changed: ${it?.target?.slug}")
-            if (it == null) targetChapterProperty.set(null)
+            if (it == null) wbDataStore.activeChapterProperty.set(null)
         }
-        targetChapterProperty.onChange { println("Active Chapter Changed: ${it?.title}") }
+        wbDataStore.activeChapterProperty.onChange { println("Active Chapter Changed: ${it?.title}") }
         initTranslations()
     }
 
@@ -85,9 +59,9 @@ class OQuAViewModel: ViewModel() {
                         found.projects.addAll(tCard.projects)
                     }
                 }
+                tCards.forEach { card -> card.projects.sortBy { workbook -> workbook.source.sort } }
+                tCards.sortByDescending { card -> card.projects.size }
             }
-            tCards.forEach { it.projects.sortBy { it.source.sort } }
-            tCards.sortByDescending { it.projects.size }
         }
     }
 }

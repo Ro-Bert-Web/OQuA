@@ -11,7 +11,7 @@ class ChapterListCellFragment: ListCellFragment<Chapter>() {
     override val root = vbox {
         button(chapterTitleProperty) {
             action {
-                viewModel.targetChapterProperty.set(item)
+                viewModel.wbDataStore.activeChapterProperty.set(item)
             }
         }
     }
