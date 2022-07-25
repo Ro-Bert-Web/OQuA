@@ -4,7 +4,17 @@ import javafx.scene.layout.Priority
 import tornadofx.*
 
 class HomeView : View() {
-    private val viewModel: OQuAViewModel by inject()
+    private val viewModel: HomeViewModel by inject()
+
+    override fun onDock() {
+        super.onDock()
+        viewModel.dock()
+    }
+
+    override fun onUndock() {
+        super.onUndock()
+        viewModel.undock()
+    }
 
     override val root = listview(viewModel.tCards) {
         vgrow = Priority.ALWAYS

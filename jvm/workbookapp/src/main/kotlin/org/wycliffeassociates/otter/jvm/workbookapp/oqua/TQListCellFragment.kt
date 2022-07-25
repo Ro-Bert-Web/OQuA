@@ -4,8 +4,6 @@ import javafx.scene.control.ToggleGroup
 import tornadofx.*
 
 class TQListCellFragment: ListCellFragment<Question>() {
-    private val viewModel: OQuAViewModel by inject()
-
     private val toggleGroup = ToggleGroup()
 
     val questionProperty = stringBinding(itemProperty) {

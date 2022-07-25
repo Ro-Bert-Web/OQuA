@@ -12,6 +12,10 @@ fun main() {
 class OQuAApp : App(OQuAView::class), IDependencyGraphProvider {
     override val dependencyGraph = DaggerAppDependencyGraph.builder().build()
 
+    init {
+        dependencyGraph.injectConfigureAudioSystem().configure()
+    }
+
     override fun start(stage: Stage) {
         super.start(stage)
 

@@ -1,31 +1,35 @@
 package org.wycliffeassociates.otter.jvm.workbookapp.oqua
 
 import javafx.beans.property.SimpleObjectProperty
-import javafx.scene.Node
 import javafx.scene.layout.Priority
+import org.wycliffeassociates.otter.jvm.workbookapp.ui.viewmodel.WorkbookDataStore
 import tornadofx.*
 
 class OQuAView : View() {
-    private val viewModel: OQuAViewModel by inject()
-    private val homeView: HomeView by inject()
-    private val projectView: ProjectView by inject()
-    private val chapterView: ChapterView by inject()
+    private val homeView = HomeView()
+    private val projectView = ProjectView()
+    private val chapterView = ChapterView()
 
-    private val view = SimpleObjectProperty<Node>(find(HomeView::class).root)
+    private val wbDataStore: WorkbookDataStore by inject()
+
+    private val view = SimpleObjectProperty<View>(homeView)
 
     init {
-        viewModel.wbDataStore.activeWorkbookProperty.onChange { updateView() }
-        viewModel.wbDataStore.activeChapterProperty.onChange { updateView() }
+        wbDataStore.activeWorkbookProperty.onChange { updateView() }
+        wbDataStore.activeChapterProperty.onChange { updateView() }
+        view.value?.onDock()
     }
 
     private fun updateView() {
-        if (viewModel.wbDataStore.activeWorkbookProperty.value == null) {
-            view.set(homeView.root)
-        } else if (viewModel.wbDataStore.activeChapterProperty.value == null) {
-            view.set(projectView.root)
+        view.value?.onUndock()
+        if (wbDataStore.activeWorkbookProperty.value == null) {
+            view.set(homeView)
+        } else if (wbDataStore.activeChapterProperty.value == null) {
+            view.set(projectView)
         } else {
-            view.set(chapterView.root)
+            view.set(chapterView)
         }
+        view.value?.onDock()
     }
 
     override val root = borderpane {
@@ -33,6 +37,6 @@ class OQuAView : View() {
         hgrow = Priority.ALWAYS
 
         top<NavBar>()
-        centerProperty().bind(view)
+        centerProperty().bind(objectBinding(view) { value?.root })
     }
 }
