@@ -2,6 +2,7 @@ package org.wycliffeassociates.otter.jvm.workbookapp.oqua
 
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.layout.Priority
+import org.wycliffeassociates.otter.jvm.controls.styles.tryImportStylesheet
 import org.wycliffeassociates.otter.jvm.workbookapp.ui.viewmodel.WorkbookDataStore
 import tornadofx.*
 
@@ -15,6 +16,7 @@ class OQuAView : View() {
     private val view = SimpleObjectProperty<View>(homeView)
 
     init {
+        tryImportStylesheet(javaClass.getResource("/css/oqua.css").toExternalForm())
         wbDataStore.activeWorkbookProperty.onChange { updateView() }
         wbDataStore.activeChapterProperty.onChange { updateView() }
         view.value?.onDock()

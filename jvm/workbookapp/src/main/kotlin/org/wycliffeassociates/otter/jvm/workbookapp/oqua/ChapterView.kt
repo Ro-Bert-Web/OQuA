@@ -2,12 +2,10 @@ package org.wycliffeassociates.otter.jvm.workbookapp.oqua
 
 import javafx.scene.layout.Priority
 import org.wycliffeassociates.otter.jvm.controls.media.simpleaudioplayer
-import org.wycliffeassociates.otter.jvm.workbookapp.ui.viewmodel.WorkbookDataStore
 import tornadofx.*
 
 class ChapterView : View() {
     private val viewModel: ChapterViewModel by inject()
-    private val wbDataStore: WorkbookDataStore by inject()
 
     override fun onDock() {
         super.onDock()
@@ -31,10 +29,9 @@ class ChapterView : View() {
             visibleWhen(playerProperty.isNotNull)
             managedProperty().bind(visibleProperty())
         }
-        listview<Question> {
+        listview(viewModel.questions) {
             vgrow = Priority.ALWAYS
             hgrow = Priority.ALWAYS
-            itemsProperty().bind(viewModel.questionsProperty)
             cellFragment(TQListCellFragment::class)
         }
     }

@@ -4,7 +4,7 @@ import org.wycliffeassociates.otter.jvm.workbookapp.ui.viewmodel.WorkbookDataSto
 import tornadofx.*
 
 class ProjectViewModel: ViewModel() {
-    val wbDataStore: WorkbookDataStore by inject()
+    private val wbDataStore: WorkbookDataStore by inject()
 
     val chaptersProperty = objectBinding(wbDataStore.activeWorkbookProperty) {
         value?.target?.chapters?.toList()?.blockingGet()?.filter { chapter ->

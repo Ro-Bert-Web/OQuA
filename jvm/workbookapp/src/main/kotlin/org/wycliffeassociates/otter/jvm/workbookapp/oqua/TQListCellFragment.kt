@@ -6,19 +6,19 @@ import tornadofx.*
 class TQListCellFragment: ListCellFragment<Question>() {
     private val toggleGroup = ToggleGroup()
 
-    val questionProperty = stringBinding(itemProperty) {
+    private val questionProperty = stringBinding(itemProperty) {
         when (this.value) {
             null -> null
             else -> this.value?.question
         }
     }
-    val answerProperty = stringBinding(itemProperty) {
+    private val answerProperty = stringBinding(itemProperty) {
         when (this.value) {
             null -> null
             else -> this.value?.answer
         }
     }
-    val verseProperty = stringBinding(itemProperty) {
+    private val verseProperty = stringBinding(itemProperty) {
         when (this.value) {
             null -> null
             else -> {

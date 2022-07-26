@@ -1,9 +1,7 @@
 package org.wycliffeassociates.otter.jvm.workbookapp.oqua
 
-import javafx.scene.paint.Color
 import org.wycliffeassociates.otter.common.data.workbook.Workbook
 import tornadofx.*
-import javax.script.Bindings
 
 class TCardListCellFragment: ListCellFragment<TranslationCard>() {
     private val sourceProperty = stringBinding(itemProperty) { this.value?.translation?.source?.name }

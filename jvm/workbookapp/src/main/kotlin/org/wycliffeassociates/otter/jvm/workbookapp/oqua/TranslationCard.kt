@@ -24,6 +24,8 @@ class TranslationCard (
         ((other is TranslationCard) && (translation == other.translation))
 
     override fun hashCode(): Int {
-        return super.hashCode()
+        var result = translation.hashCode()
+        result = 31 * result + projects.hashCode()
+        return result
     }
 }

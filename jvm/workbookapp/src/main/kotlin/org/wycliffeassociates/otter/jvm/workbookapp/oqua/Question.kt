@@ -33,15 +33,23 @@ data class Question(
     val question: String?
         get() = when (resources) {
             null -> null
-            else -> (resources as ResourceGroup).resources.blockingFirst().title.textItem.text
+            else -> resources.resources.blockingFirst().title.textItem.text
         }
     val answer: String?
         get() = when (resources) {
             null -> null
-            else -> (resources as ResourceGroup).resources.blockingFirst().body?.textItem?.text
+            else -> resources.resources.blockingFirst().body?.textItem?.text
         }
     var result: String? = null
 
     override fun equals(other: Any?): Boolean =
         (other is Question) && (question == other.question) && (answer == other.answer)
+
+    override fun hashCode(): Int {
+        var result = start.hashCode()
+        result = 31 * result + end.hashCode()
+        result = 31 * result + (question?.hashCode() ?: 0)
+        result = 31 * result + (answer?.hashCode() ?: 0)
+        return result
+    }
 }
