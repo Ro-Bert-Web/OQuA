@@ -7,34 +7,32 @@ class TQListCellFragment: ListCellFragment<Question>() {
     private val toggleGroup = ToggleGroup()
 
     private val questionProperty = stringBinding(itemProperty) {
-        when (this.value) {
-            null -> null
-            else -> this.value?.question
-        }
+        value?.question
     }
     private val answerProperty = stringBinding(itemProperty) {
-        when (this.value) {
-            null -> null
-            else -> this.value?.answer
-        }
+        value?.answer
     }
     private val verseProperty = stringBinding(itemProperty) {
-        when (this.value) {
-            null -> null
-            else -> {
-                if (this.value.start == this.value.end) {
-                    "Verse ${this.value.start}"
-                } else {
-                    "Verses ${this.value.start} - ${this.value.end}"
-                }
-            }
+        value?.let { question ->
+            getVerseLabel(question)
+        }
+    }
+
+    private fun getVerseLabel(question: Question): String {
+        return if (question.start == question.end) {
+            "Verse ${question.start}"
+        } else {
+            "Verses ${question.start} - ${question.end}"
         }
     }
 
     override val root = vbox {
         text(verseProperty)
         text(questionProperty)
+
         vbox {
+            managedWhen(visibleProperty()) // Included for the possibility of hidding the answers initially
+
             text(answerProperty)
             hbox {
                 val correct = togglebutton("Correct", toggleGroup) {

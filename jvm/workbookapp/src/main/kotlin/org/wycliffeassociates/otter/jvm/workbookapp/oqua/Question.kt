@@ -31,15 +31,9 @@ data class Question(
     val resources: ResourceGroup?
 ) {
     val question: String?
-        get() = when (resources) {
-            null -> null
-            else -> resources.resources.blockingFirst().title.textItem.text
-        }
+        get() = resources?.resources?.blockingFirst()?.title?.textItem?.text
     val answer: String?
-        get() = when (resources) {
-            null -> null
-            else -> resources.resources.blockingFirst().body?.textItem?.text
-        }
+        get() = resources?.resources?.blockingFirst()?.body?.textItem?.text
     var result: String? = null
 
     override fun equals(other: Any?): Boolean =

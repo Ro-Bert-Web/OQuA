@@ -28,27 +28,41 @@ class ChapterViewModel : ViewModel() {
         workbook = wbDataStore.workbook
         chapterNumber = wbDataStore.chapter.sort
 
-        wbDataStore.chapter.audio.selected.value?.value?.let { take ->
-            val audioPlayer = (app as IDependencyGraphProvider).dependencyGraph.injectPlayer()
-            audioPlayer.load(take.file)
-            audioPlayerProperty.set(audioPlayer)
-        }
+        updatePlayer()
 
-        val newQuestions = wbDataStore.getSourceChapter().blockingGet()?.let { chapter ->
-            questionsDedup(chapter.chunks.toList().blockingGet().mapNotNull(::questionFromChunk)).toMutableList()
-        } ?: mutableListOf<Question>()
+        val newQuestions = getQuestions()
 
-        gradeRepo.readGradeFile(chapterNumber)?.grades?.forEach { grade ->
-            newQuestions.find { question ->
-                (question.question == grade.question) && (question.answer == grade.answer)
-            }?.run {
-                result = grade.result
-            }
+        gradeRepo.readGradeFile(chapterNumber)?.grades?.let { grades ->
+            loadResults(newQuestions, grades)
         }
         questions.setAll(newQuestions)
     }
 
     fun undock() {
         gradeRepo.writeGradeFile(workbook, chapterNumber, questions)
+    }
+
+    private fun updatePlayer() {
+        wbDataStore.chapter.audio.selected.value?.value?.let { take ->
+            val audioPlayer = (app as IDependencyGraphProvider).dependencyGraph.injectPlayer()
+            audioPlayer.load(take.file)
+            audioPlayerProperty.set(audioPlayer)
+        }
+    }
+
+    private fun getQuestions(): MutableList<Question> {
+        return wbDataStore.getSourceChapter().blockingGet()?.let { chapter ->
+            questionsDedup(chapter.chunks.toList().blockingGet().mapNotNull(::questionFromChunk)).toMutableList()
+        } ?: mutableListOf<Question>()
+    }
+
+    private fun loadResults(questions: MutableList<Question>, grades: List<Grade>) {
+        grades.forEach { grade ->
+            questions.find { question ->
+                (question.question == grade.question) && (question.answer == grade.answer)
+            }?.run {
+                result = grade.result
+            }
+        }
     }
 }

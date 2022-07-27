@@ -7,7 +7,9 @@ import tornadofx.*
 class ProjectListCellFragment: ListCellFragment<Workbook>() {
     private val wbDataStore: WorkbookDataStore by inject()
 
-    private val projectProperty = stringBinding(itemProperty) { this.value?.source?.title }
+    private val projectProperty = stringBinding(itemProperty) {
+        this.value?.source?.title
+    }
 
     override val root = vbox {
         button (projectProperty) {

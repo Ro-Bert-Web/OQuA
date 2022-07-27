@@ -20,7 +20,7 @@ class HomeViewModel: ViewModel() {
         workbookRepo.getProjects().observeOnFx().subscribe { sources ->
             sources.forEach { workbook ->
                 val tCard = tCardFromWB(workbook)
-                if (tCard.projects.size > 0) {
+                if (tCard.hasAudio) {
                     val found = tCards.find { card -> card == tCard }
                     if (found == null) {
                         tCards.add(tCard)
@@ -29,7 +29,7 @@ class HomeViewModel: ViewModel() {
                     }
                 }
             }
-            tCards.forEach { card -> card.projects.sortBy { workbook -> workbook.source.sort } }
+            tCards.forEach { card -> card.sortProjects() }
             tCards.sortByDescending { card -> card.projects.size }
         }
     }

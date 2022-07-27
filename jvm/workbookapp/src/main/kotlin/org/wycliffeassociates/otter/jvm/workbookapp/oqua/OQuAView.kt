@@ -16,14 +16,17 @@ class OQuAView : View() {
     private val view = SimpleObjectProperty<View>(homeView)
 
     init {
-        tryImportStylesheet(javaClass.getResource("/css/oqua.css").toExternalForm())
+        javaClass.getResource("/css/oqua.css")?.let { tryImportStylesheet(it.toExternalForm()) }
+
         wbDataStore.activeWorkbookProperty.onChange { updateView() }
         wbDataStore.activeChapterProperty.onChange { updateView() }
+
         view.value?.onDock()
     }
 
     private fun updateView() {
         view.value?.onUndock()
+
         if (wbDataStore.activeWorkbookProperty.value == null) {
             view.set(homeView)
         } else if (wbDataStore.activeChapterProperty.value == null) {
@@ -31,6 +34,7 @@ class OQuAView : View() {
         } else {
             view.set(chapterView)
         }
+
         view.value?.onDock()
     }
 
